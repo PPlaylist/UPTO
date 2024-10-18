@@ -410,34 +410,79 @@
     </ul>
   </footer>
 
-  <!-- JavaScript 코드 -->
-  <script>
-    // 모달 열기 함수
-    function openModal(coinId) {
-      const modal = document.getElementById('modal');
-      const modalTitle = document.getElementById('modalTitle');
-      const modalContent = document.getElementById('modalContent');
-
-      // 코인 ID에 따라 상세 정보 설정
-      if (coinId === 'coin1') {
-        modalTitle.textContent = '에코코인 (ECO)';
-        modalContent.innerHTML = '<p>에코코인의 상세 정보입니다.</p>';
-      } else if (coinId === 'coin2') {
-        modalTitle.textContent = '그린토큰 (GRN)';
-        modalContent.innerHTML = '<p>그린토큰의 상세 정보입니다.</p>';
-      } else if (coinId === 'coin3') {
-        modalTitle.textContent = '블루코인 (BLU)';
-        modalContent.innerHTML = '<p>블루코인의 상세 정보입니다.</p>';
-      } else if (coinId === 'coin4') {
-        modalTitle.textContent = '솔라코인 (SOL)';
-        modalContent.innerHTML = '<p>솔라코인의 상세 정보입니다.</p>';
-      } else if (coinId === 'coin5') {
-        modalTitle.textContent = '에너지코인 (NRG)';
-        modalContent.innerHTML = '<p>에너지코인의 상세 정보입니다.</p>';
-      }
-
-      modal.style.display = 'block';
-    }
+    <!-- JavaScript 코드 -->
+    <script>
+        // 모달 열기 함수
+        function openModal(coinId) {
+          const modal = document.getElementById('modal');
+          const modalTitle = document.getElementById('modalTitle');
+          const modalContent = document.getElementById('modalContent');
+    
+          // 코인 ID에 따라 상세 정보 설정
+          if (coinId === 'coin1') {
+            modalTitle.textContent = '에코코인 (ECO)';
+            modalContent.innerHTML = `
+              <p><strong>친환경 등급: A</strong></p>
+              <p><strong>에너지 소비량:</strong> 0.2 kWh</p>
+              <p><strong>탄소 배출량:</strong> 0.1 kg CO₂</p>
+              <p><strong>등급 산정 기준:</strong></p>
+              <p>에코코인은 <em>Proof of Stake</em> 합의 알고리즘을 사용하여 에너지 소비량이 낮습니다. 탄소 배출량도 업계 평균보다 70% 적습니다. 따라서 친환경 등급 A를 부여했습니다.</p>
+              <p><strong>등급 산정식:</strong></p>
+              <p>종합 점수 = (에너지 소비량 × 0.5) + (탄소 배출량 × 0.5)</p>
+              <p>A등급: 종합 점수 ≤ 0.2</p>
+            `;
+          } else if (coinId === 'coin2') {
+            modalTitle.textContent = '그린토큰 (GRN)';
+            modalContent.innerHTML = `
+              <p><strong>친환경 등급: B</strong></p>
+              <p><strong>에너지 소비량:</strong> 0.5 kWh</p>
+              <p><strong>탄소 배출량:</strong> 0.3 kg CO₂</p>
+              <p><strong>등급 산정 기준:</strong></p>
+              <p>그린토큰은 에너지 효율적인 <em>Delegated Proof of Stake</em> 알고리즘을 사용하지만, 네트워크 활동량이 많아 에너지 소비가 다소 높습니다. 따라서 친환경 등급 B를 부여했습니다.</p>
+              <p><strong>등급 산정식:</strong></p>
+              <p>종합 점수 = (에너지 소비량 × 0.6) + (탄소 배출량 × 0.4)</p>
+              <p>B등급: 0.2 < 종합 점수 ≤ 0.5</p>
+            `;
+          } else if (coinId === 'coin3') {
+            modalTitle.textContent = '블루코인 (BLU)';
+            modalContent.innerHTML = `
+              <p><strong>친환경 등급: A</strong></p>
+              <p><strong>에너지 소비량:</strong> 0.1 kWh</p>
+              <p><strong>탄소 배출량:</strong> 0.05 kg CO₂</p>
+              <p><strong>등급 산정 기준:</strong></p>
+              <p>블루코인은 에너지 소모가 거의 없는 <em>Proof of Authority</em> 알고리즘을 사용합니다. 재생 에너지 사용 비율이 80% 이상입니다. 따라서 친환경 등급 A를 부여했습니다.</p>
+              <p><strong>등급 산정식:</strong></p>
+              <p>종합 점수 = (에너지 소비량 × 0.4) + (탄소 배출량 × 0.6)</p>
+              <p>A등급: 종합 점수 ≤ 0.15</p>
+            `;
+          } else if (coinId === 'coin4') {
+            modalTitle.textContent = '솔라코인 (SOL)';
+            modalContent.innerHTML = `
+              <p><strong>친환경 등급: B</strong></p>
+              <p><strong>에너지 소비량:</strong> 0.4 kWh</p>
+              <p><strong>탄소 배출량:</strong> 0.25 kg CO₂</p>
+              <p><strong>등급 산정 기준:</strong></p>
+              <p>솔라코인은 <em>Proof of Stake</em> 알고리즘을 사용하며, 일부 노드가 재생 에너지를 사용합니다. 그러나 전체 네트워크의 재생 에너지 사용 비율이 50% 미만입니다. 따라서 친환경 등급 B를 부여했습니다.</p>
+              <p><strong>등급 산정식:</strong></p>
+              <p>종합 점수 = (에너지 소비량 × 0.5) + (탄소 배출량 × 0.5)</p>
+              <p>B등급: 0.2 < 종합 점수 ≤ 0.5</p>
+            `;
+          } else if (coinId === 'coin5') {
+            modalTitle.textContent = '에너지코인 (NRG)';
+            modalContent.innerHTML = `
+              <p><strong>친환경 등급: C</strong></p>
+              <p><strong>에너지 소비량:</strong> 1.0 kWh</p>
+              <p><strong>탄소 배출량:</strong> 0.6 kg CO₂</p>
+              <p><strong>등급 산정 기준:</strong></p>
+              <p>에너지코인은 <em>Proof of Work</em> 알고리즘을 사용하여 에너지 소비량이 높습니다. 재생 에너지 사용 비율이 낮아 친환경적이지 않습니다. 따라서 친환경 등급 C를 부여했습니다.</p>
+              <p><strong>등급 산정식:</strong></p>
+              <p>종합 점수 = (에너지 소비량 × 0.7) + (탄소 배출량 × 0.3)</p>
+              <p>C등급: 종합 점수 > 0.5</p>
+            `;
+          }
+    
+          modal.style.display = 'block';
+        }
 
     // 모달 닫기 함수
     function closeModal() {
