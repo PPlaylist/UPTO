@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>업비트 친환경 코인 서비스</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+  <!-- CSS 스타일 -->
+  <style>
+    /* 기본 스타일 초기화 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: #f8f9fa;
+      color: #212529;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* 헤더 스타일 */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #1b1d21;
+      padding: 10px 20px;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+
+    nav li {
+      margin-left: 20px;
+    }
+
+    nav a {
+      color: #fff;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #00b5ad;
+    }
+
+    /* 메인 컨텐츠 스타일 */
+    main {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 20px;
+    }
+
+    /* 사이드바 스타일 */
+    aside {
+      width: 100%;
+      max-width: 250px;
+      padding-right: 20px;
+      margin-bottom: 20px;
+    }
+
+    aside .portfolio,
+    aside .rewards {
+      background-color: #fff;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 4px;
+      border: 1px solid #dee2e6;
+    }
+
+    aside h2 {
+      margin-bottom: 15px;
+      color: #343a40;
+      font-size: 1.1em;
+    }
+
+    .badge {
+      background-color: #00b5ad;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: 0.9em;
+    }
+
+    /* 메인 섹션 스타일 */
+    .main-content {
+      flex: 1;
+    }
+
+    .eco-coin-list {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 4px;
+      border: 1px solid #dee2e6;
+    }
+
+    .eco-coin-list h1 {
+      margin-bottom: 20px;
+      color: #343a40;
+      font-size: 1.5em;
+    }
+
+    /* 필터 및 검색 기능 */
+    .filter-search {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .filter-search input,
+    .filter-search select {
+      padding: 8px 10px;
+      margin-right: 10px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+
+    /* 테이블 스타일 */
+    .eco-coin-list table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9em;
+    }
+
+    .eco-coin-list th,
+    .eco-coin-list td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #dee2e6;
+    }
+
+    .eco-coin-list th {
+      background-color: #f1f3f5;
+      color: #495057;
+      font-weight: 600;
+    }
+
+    .eco-coin-list tr:hover {
+      background-color: #f8f9fa;
+    }
+
+    .eco-coin-list button {
+      padding: 6px 12px;
+      background-color: #00b5ad;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 0.9em;
+      transition: background-color 0.3s;
+    }
+
+    .eco-coin-list button:hover {
+      background-color: #009d8e;
+    }
+
+    /* 등급 스타일 */
+    .grade {
+      font-weight: bold;
+      padding: 5px 8px;
+      border-radius: 15px;
+      font-size: 0.85em;
+    }
+
+    .grade-a {
+      background-color: #00b5ad;
+      color: #fff;
+    }
+
+    .grade-b {
+      background-color: #ffc107;
+      color: #fff;
+    }
+
+    .grade-c {
+      background-color: #dc3545;
+      color: #fff;
+    }
+
+    /* 푸터 스타일 */
+    footer {
+      background-color: #1b1d21;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    footer ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    footer li {
+      margin: 0 10px;
+    }
+
+    footer a {
+      color: #adb5bd;
+      font-size: 0.9em;
+      transition: color 0.3s;
+    }
+
+    footer a:hover {
+      color: #fff;
+    }
+
+    /* 반응형 디자인 */
+    @media (max-width: 768px) {
+      main {
+        flex-direction: column;
+      }
+
+      aside,
+      .main-content {
+        width: 100%;
+        padding: 0;
+      }
+    }
+
+    /* 모달 스타일 */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 5% auto;
+      padding: 20px;
+      border-radius: 4px;
+      width: 90%;
+      max-width: 600px;
+      border: 1px solid #dee2e6;
+    }
+
+    .modal-close {
+      float: right;
+      font-size: 1.5em;
+      cursor: pointer;
+      color: #6c757d;
+    }
+
+    .modal-close:hover {
+      color: #343a40;
+    }
+  </style>
+</head>
+<body>
+  <!-- 헤더 -->
+  <header>
+    <div class="logo">
+      <img src="upbit_logo.svg" alt="업비트 로고">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#">홈</a></li>
+        <li><a href="#">마켓</a></li>
+        <li><a href="#">친환경 코인</a></li>
+        <li><a href="#">투자 내역</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- 메인 컨텐츠 -->
+  <main>
+    <!-- 사이드바 -->
+    <aside>
+      <div class="portfolio">
+        <h2>내 포트폴리오 친환경 현황</h2>
+        <p>친환경 코인 비율: <strong>70%</strong></p>
+        <p>예상 탄소 절감량: <strong>15kg CO₂</strong></p>
+      </div>
+      <div class="rewards">
+        <h2>나의 인센티브</h2>
+        <p>보유 배지: <span class="badge">Eco Investor</span></p>
+        <p>적립 포인트: <strong>1,200P</strong></p>
+      </div>
+    </aside>
+
+    <!-- 메인 섹션 -->
+    <section class="main-content">
+      <!-- 친환경 코인 목록 -->
+      <div class="eco-coin-list">
+        <h1>친환경 코인 목록</h1>
+        <!-- 필터 및 검색 기능 -->
+        <div class="filter-search">
+          <input type="text" placeholder="코인 검색" id="searchInput" onkeyup="filterCoins()">
+          <select id="gradeFilter" onchange="filterCoins()">
+            <option value="">등급 선택</option>
+            <option value="A">A 등급</option>
+            <option value="B">B 등급</option>
+            <option value="C">C 등급</option>
+          </select>
+        </div>
+        <table id="coinTable">
+          <thead>
+            <tr>
+              <th>코인명</th>
+              <th>심볼</th>
+              <th>친환경 등급</th>
+              <th>에너지 소비량</th>
+              <th>탄소 배출량</th>
+              <th>현재가</th>
+              <th>변동률</th>
+              <th>거래</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- 코인 정보 예시 -->
+            <tr onclick="openModal('coin1')">
+              <td>에코코인</td>
+              <td>ECO</td>
+              <td><span class="grade grade-a">A</span></td>
+              <td>0.2 kWh</td>
+              <td>0.1 kg CO₂</td>
+              <td>₩3,500</td>
+              <td style="color: #dc3545;">-1.25%</td>
+              <td><button>매수</button></td>
+            </tr>
+            <tr onclick="openModal('coin2')">
+              <td>그린토큰</td>
+              <td>GRN</td>
+              <td><span class="grade grade-b">B</span></td>
+              <td>0.5 kWh</td>
+              <td>0.3 kg CO₂</td>
+              <td>₩1,200</td>
+              <td style="color: #28a745;">+2.50%</td>
+              <td><button>매수</button></td>
+            </tr>
+            <tr onclick="openModal('coin3')">
+              <td>블루코인</td>
+              <td>BLU</td>
+              <td><span class="grade grade-a">A</span></td>
+              <td>0.1 kWh</td>
+              <td>0.05 kg CO₂</td>
+              <td>₩5,800</td>
+              <td style="color: #28a745;">+0.75%</td>
+              <td><button>매수</button></td>
+            </tr>
+            <tr onclick="openModal('coin4')">
+              <td>솔코인</td>
+              <td>SOL</td>
+              <td><span class="grade grade-b">B</span></td>
+              <td>0.4 kWh</td>
+              <td>0.25 kg CO₂</td>
+              <td>₩2,100</td>
+              <td style="color: #dc3545;">-0.50%</td>
+              <td><button>매수</button></td>
+            </tr>
+            <tr onclick="openModal('coin5')">
+              <td>에너지코인</td>
+              <td>NRG</td>
+              <td><span class="grade grade-c">C</span></td>
+              <td>1.0 kWh</td>
+              <td>0.6 kg CO₂</td>
+              <td>₩800</td>
+              <td style="color: #28a745;">+3.00%</td>
+              <td><button>매수</button></td>
+            </tr>
+            <!-- 추가 코인 정보 -->
+            <!-- ... -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- 모달 -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal()">&times;</span>
+      <h2 id="modalTitle">코인 상세 정보</h2>
+      <p id="modalContent">여기에 코인에 대한 상세 정보가 표시됩니다.</p>
+    </div>
+  </div>
+
+  <!-- 푸터 -->
+  <footer>
+    <p>&copy; 2023 업비트. 모든 권리 보유.</p>
+    <ul>
+      <li><a href="#">회사 소개</a></li>
+      <li><a href="#">고객 지원</a></li>
+      <li><a href="#">이용 약관</a></li>
+      <li><a href="#">개인정보 처리방침</a></li>
+    </ul>
+  </footer>
+
+  <!-- JavaScript 코드 -->
+  <script>
+    // 모달 열기 함수
+    function openModal(coinId) {
+      const modal = document.getElementById('modal');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalContent = document.getElementById('modalContent');
+
+      // 코인 ID에 따라 상세 정보 설정
+      if (coinId === 'coin1') {
+        modalTitle.textContent = '에코코인 (ECO)';
+        modalContent.innerHTML = '<p>에코코인의 상세 정보입니다.</p>';
+      } else if (coinId === 'coin2') {
+        modalTitle.textContent = '그린토큰 (GRN)';
+        modalContent.innerHTML = '<p>그린토큰의 상세 정보입니다.</p>';
+      } else if (coinId === 'coin3') {
+        modalTitle.textContent = '블루코인 (BLU)';
+        modalContent.innerHTML = '<p>블루코인의 상세 정보입니다.</p>';
+      } else if (coinId === 'coin4') {
+        modalTitle.textContent = '솔라코인 (SOL)';
+        modalContent.innerHTML = '<p>솔라코인의 상세 정보입니다.</p>';
+      } else if (coinId === 'coin5') {
+        modalTitle.textContent = '에너지코인 (NRG)';
+        modalContent.innerHTML = '<p>에너지코인의 상세 정보입니다.</p>';
+      }
+
+      modal.style.display = 'block';
+    }
+
+    // 모달 닫기 함수
+    function closeModal() {
+      const modal = document.getElementById('modal');
+      modal.style.display = 'none';
+    }
+
+    // 모달 외부 클릭 시 닫기
+    window.onclick = function(event) {
+      const modal = document.getElementById('modal');
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    }
+
+    // 코인 필터링 함수
+    function filterCoins() {
+      const input = document.getElementById('searchInput').value.toUpperCase();
+      const filter = document.getElementById('gradeFilter').value;
+      const table = document.getElementById('coinTable');
+      const tr = table.getElementsByTagName('tr');
+
+      for (let i = 1; i < tr.length; i++) {
+        const tdName = tr[i].getElementsByTagName('td')[0];
+        const tdGrade = tr[i].getElementsByTagName('td')[2];
+        if (tdName && tdGrade) {
+          const txtValue = tdName.textContent || tdName.innerText;
+          const gradeValue = tdGrade.textContent || tdGrade.innerText;
+
+          if (
+            (txtValue.toUpperCase().indexOf(input) > -1 || input === '') &&
+            (gradeValue.indexOf(filter) > -1 || filter === '')
+          ) {
+            tr[i].style.display = '';
+          } else {
+            tr[i].style.display = 'none';
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>
